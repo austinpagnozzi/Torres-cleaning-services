@@ -5,6 +5,32 @@
 (function () {
   'use strict';
 
+  /* --------------------------- Services dropdown -------------------------- */
+  /* Plain <details>/<summary> — works with no JS at all. This just adds the
+     conveniences a real dropdown menu needs: closing on an outside click,
+     on Escape, and after a link inside it is chosen. Declared before the
+     mobile nav block below, which calls closeDropdowns() on close. */
+
+  var dropdowns = document.querySelectorAll('.nav-dropdown');
+
+  var closeDropdowns = function (except) {
+    dropdowns.forEach(function (d) { if (d !== except) d.open = false; });
+  };
+
+  dropdowns.forEach(function (d) {
+    d.addEventListener('toggle', function () {
+      if (d.open) closeDropdowns(d);
+    });
+  });
+
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('.nav-dropdown')) closeDropdowns();
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeDropdowns();
+  });
+
   /* ------------------------------ Mobile nav ----------------------------- */
 
   var toggle = document.querySelector('.nav-toggle');
@@ -16,6 +42,7 @@
     var setNav = function (open) {
       toggle.setAttribute('aria-expanded', String(open));
       nav.hidden = !open;
+      if (!open) closeDropdowns();
     };
 
     // The nav is a plain flex row on desktop and a dropdown below 980px, so

@@ -1,17 +1,51 @@
-# Torres Cleaning Services — Homepage Mockup
+# Torres Cleaning Services — Website Mockup
 
-A single-page homepage mockup for **Torres Cleaning Services — Landscaping &
-Property Maintenance**, Portland, Maine. Static HTML, one stylesheet, one
-small script. No build step, no framework, no npm install.
+A multi-page static site mockup for **Torres Cleaning Services — Landscaping
+& Property Maintenance**, Portland, Maine. Plain HTML, one shared stylesheet,
+one shared script. No build step, no framework, no npm install — every page
+is a real, independent `.html` file; nothing is templated or assembled at
+request time.
 
 ```
-index.html                  the page
-assets/css/styles.css       all styling
-assets/js/main.js           mobile nav, form mock, placeholder toggle
-assets/img/logo.jpg         the real crest logo
-assets/img/photos/          six real job photos (see photos/README.md)
-scripts/build-artifact.mjs  inlines everything into one shareable file
+index.html                        homepage
+about.html                        under construction
+contact.html                      under construction
+estimate.html                     the real, functional free-estimate page
+services/index.html               services overview (all 6 services)
+services/lawn-care-mowing.html
+services/landscape-design-installation.html
+services/mulch-beds-weed-control.html
+services/tree-shrub-trimming.html
+services/property-cleanups-hauling.html
+assets/css/styles.css             all styling
+assets/js/main.js                 mobile nav, dropdown, form mock, placeholder toggle
+assets/img/logo.jpg                the real crest logo
+assets/img/photos/                 six real job photos (see photos/README.md)
+scripts/build-artifact.mjs         inlines the homepage into one shareable file
 ```
+
+## Site structure
+
+The primary nav is the same on every page: a **Services** dropdown (overview
++ the five pages above), Why Us / Reviews / Service Area (anchors back to
+sections on the homepage), About, Contact, and a Free Estimate button. House
+Cleaning — the business's sixth real service — has a card on the services
+overview page but no dedicated page of its own; only five services got the
+"one page per service" treatment, per how this was scoped.
+
+The dropdown is a plain `<details>/<summary>` — it works with zero JavaScript.
+`assets/js/main.js` only adds the conveniences a real menu needs on top of
+that: closing on an outside click, on Escape, and after a link inside it is
+chosen.
+
+**No templating engine** stands behind any of this — the header, nav, and
+footer are duplicated in every `.html` file, same as the rest of this project.
+That was a deliberate call to match the project's existing "no build step"
+posture rather than introduce one. The tradeoff: editing shared chrome (the
+nav, the footer) means editing it in all nine files, not one. There's no
+tooling here to keep them in sync — if that becomes painful, templating (even
+something as simple as a shared include file assembled at edit time) would be
+the natural next step, but hasn't been added.
 
 ## Viewing it
 
@@ -129,6 +163,11 @@ for a `mailto:` link.
 node scripts/build-artifact.mjs   # writes dist/torres-homepage.html
 ```
 
-Inlines the CSS, JS and all images (as base64 data URIs) into one
+Inlines the CSS, JS and homepage images (as base64 data URIs) into one
 self-contained file that can be emailed or opened from a USB stick with no
-server. Runs ~1.4MB with real photography embedded.
+server. **This bundles the homepage only** — now that the site is multi-page,
+a true single file can't represent all nine pages at once. Nav links inside
+that bundle to About, Contact, Free Estimate, or any Services page won't
+resolve; anchor links back to the homepage's own sections (Why Us, Reviews,
+Service Area) still work fine. To see the full site navigate, serve the
+whole directory (see "Viewing it" above) rather than relying on this bundle.

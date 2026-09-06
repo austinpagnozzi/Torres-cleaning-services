@@ -1,8 +1,15 @@
 # Placeholder checklist
 
-Turn on **Highlight placeholder copy** (bottom-right of the page) to see each
-remaining one in context. The counter beside the toggle should read **0** when
-you're done. It currently reads **11**.
+Turn on **Highlight placeholder copy** (bottom-right of any page) to see each
+remaining one in context. The counter is per-page, not sitewide — it should
+read **0** on every page when you're done. Right now: **7** on the homepage,
+**1** on the estimate page, **0** everywhere else (About, Contact, and all six
+services pages have none).
+
+The stats bar that used to carry three invented numbers (years in business,
+properties maintained, average rating) is gone — replaced with three real,
+verified facts (5★ Facebook rating, always open, Greater Portland service
+area), since none of the original three could be backed up.
 
 Prices and every turnaround-time guarantee (24-hour, hours of operation) have
 been removed from the page entirely rather than left as placeholders — see
@@ -29,18 +36,7 @@ the README's "Pricing" and "Hours" sections.
 
 ## Still needed
 
-### Numbers — the highest-risk items left on the page
-
-Do not publish a figure you can't back up.
-
-- `10+` years in business
-- `400+` properties maintained
-- `4.9★` average rating
-
-The stats bar is three invented numbers in a row. If real figures aren't
-available, delete that section rather than soften it.
-
-Two softer turnaround claims are still on the page, not marked `.ph` but worth
+Two softer turnaround claims are still on the homepage, not marked `.ph` but worth
 a look: **"Same-week walk-through"** and **"Same-week start"** on the hero
 estimate card, and **"the same business day"** on the estimate form. Same
 category of unverified promise as the 24-hour claim that was already removed
@@ -71,10 +67,18 @@ businesses" without going further.
 The footer just says "Portland, ME" — no street address was supplied. Add one
 if the business works from a public address.
 
+### About and Contact pages
+
+Both are placeholder "under construction" stubs — no real content was
+supplied for either. Write and build these before launch; right now the nav
+links to two dead ends.
+
 ## Also before launch
 
+- [ ] Write real About and Contact pages (currently under-construction stubs)
 - [ ] Connect the estimate form to a real endpoint (see README)
-- [ ] Remove the `.ph-bar` toggle, its JS block, and the `.ph` CSS rules
+- [ ] Remove the `.ph-bar` toggle, its JS block, and the `.ph` CSS rules — on
+      every page, not just the homepage
 - [ ] Decide on the softer turnaround-time language noted above
 - [ ] Add a favicon
 - [ ] Fill in the `og:image` for social sharing previews
