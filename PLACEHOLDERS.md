@@ -2,14 +2,14 @@
 
 Turn on **Highlight placeholder copy** (bottom-right of the page) to see each
 remaining one in context. The counter beside the toggle should read **0** when
-you're done. It currently reads **39**.
+you're done. It currently reads **15**.
 
 Prices and the 24-hour turnaround claim have been removed from the page
 entirely rather than left as placeholders — see the README's "Pricing"
 section. The gallery photography is tracked separately too, in
 `assets/img/generated/README.md`, since it isn't text copy.
 
-## Already filled in — real, verified from the business's Facebook page
+## Already filled in — real, verified
 
 - **Phone** `(207) 800-6690` — top bar, hero CTA, estimate panel, footer, mobile
   call bar, and every `tel:` href
@@ -19,19 +19,16 @@ section. The gallery photography is tracked separately too, in
 - **Business name** and the "Landscaping & Property Maintenance" tagline
 - **Service lines** — lawn care, landscaping, yard cleanups and house cleaning
 - **Positioning copy** — "reliable, affordable and detail-oriented", "quality
-  work, honest service", "free estimates" — all taken from their own About text
+  work, honest service", "free estimates" — from their own About text
+- **Location** — Portland, Maine, serving the greater Portland area. Top bar,
+  hero paragraph, footer blurb, service-area intro and footer address all use
+  this now. The six area chips (Portland, South Portland, Westbrook, Falmouth,
+  Cape Elizabeth, Scarborough) are a reasonable reading of "greater Portland"
+  — add, remove, or reorder to match what's actually covered.
+- **Reviews** — the two testimonials (Owen Bernsee, Karen Nichols) are real
+  recommendations copied from the Facebook page, not invented.
 
 ## Still needed
-
-### Service area — the biggest gap
-
-Nothing on the Facebook page names a town. The `(207)` area code is Maine, but
-a mobile number follows its owner, so nothing here assumes a location.
-
-- `[Your City & surrounding areas]` — top bar
-- `[your service area]` — hero paragraph, footer blurb
-- `[Your City]` — service-area section intro
-- `[City One]` … `[City Six]` — the six area chips (add or remove to match)
 
 ### Hours
 
@@ -39,8 +36,9 @@ a mobile number follows its owner, so nothing here assumes a location.
 
 ### Street address
 
-`[Street address, City, ST ZIP]` in the footer. Drop the line entirely if the
-business doesn't work from a public address.
+The footer currently just says "Portland, ME" — no street address was
+supplied. Add one if the business has a public address, or leave it as a city
+only.
 
 ### Numbers — the highest-risk items on the page
 
@@ -68,14 +66,11 @@ either.** These are the only statements on the page that carry legal weight in
 most states, so keep them only if literally true. If the business is insured but
 not licensed, say exactly that instead; if neither, delete all four.
 
-### Reviews — currently invented
+### More reviews
 
-All three testimonials, the reviewer names, initials and locations are written
-from scratch. The Facebook page shows 26 followers and no visible reviews, so
-there is nothing real to copy across yet.
-
-Replace them with real quotes once they exist, with the reviewer's permission —
-or delete the whole `#reviews` section. Do not ship invented reviews.
+Only two real recommendations were available to pull from Facebook. Add more
+as they come in — same markup pattern, `.quote` inside `.quotes`, no `.ph`
+needed once the quote is real.
 
 ### Commercial section
 
@@ -87,7 +82,9 @@ businesses" without going further.
 
 The hero background, the estimate section's background, and the three "On the
 job" gallery tiles are procedurally generated art in the site's palette, not
-real photographs — no stock-photo host was reachable to source real ones. See
+real photographs — no stock-photo host was reachable to source real ones, and
+real job photos sent in chat couldn't be saved to disk this session either
+(see README's "The photography" section for what happened there). See
 `assets/img/generated/README.md`. The gallery section has its own `.ph` note
 saying the same thing; remove that note when the photos are swapped.
 

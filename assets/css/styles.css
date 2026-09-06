@@ -575,6 +575,16 @@ body.show-ph .ph {
 }
 .quote .stars { display: inline-flex; gap: 2px; color: var(--gold); margin-bottom: .8rem; }
 .quote .stars svg { width: 17px; height: 17px; }
+.quote__badge {
+  display: inline-flex; align-items: center; gap: .4em;
+  padding: .35em .8em .35em .6em;
+  margin-bottom: .9rem;
+  background: var(--green-tint);
+  color: var(--green-dark);
+  border-radius: 999px;
+  font-size: .82rem; font-weight: 700;
+}
+.quote__badge svg { width: 15px; height: 15px; }
 .quote blockquote { margin: 0 0 1.4rem; font-size: 1rem; color: var(--ink-2); }
 .quote figcaption { margin-top: auto; display: flex; align-items: center; gap: .75em; }
 .quote__avatar {

@@ -113,6 +113,16 @@ tuned to the site's own charcoal-and-green palette rather than borrowed from
 somewhere else. See `assets/img/generated/README.md` for how to regenerate or
 replace them — swapping in real job photos is a same-filename drop-in.
 
+Real job photos were sent in chat once, as a batch of four. Only images the
+harness explicitly persists to disk are usable here — they arrive with a
+file path — and none of that batch got one; the one review-screenshot sent
+alongside them did, and its text is what's now in the Reviews section. So the
+four photos were visible in conversation but never became files this
+assistant could read pixel data from or copy into the repo. If you want them
+in, resend them (one at a time is more likely to persist reliably than a
+batch) and they can be swapped in the same way the crest logo eventually
+should be — see "The logo" above.
+
 ## The estimate form
 
 `assets/js/main.js` intercepts the submit and shows a "nothing was actually
