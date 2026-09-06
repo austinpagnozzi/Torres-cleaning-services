@@ -425,6 +425,22 @@ img, svg { max-width: 100%; }
 .card__link { font-weight: 700; font-size: .89rem; text-decoration: none; color: var(--green-dark); white-space: nowrap; }
 .card__link:hover { text-decoration: underline; }
 
+/* Photo-fronted variant — completed-work thumbnail instead of an icon, for
+   a grid that reads as a gallery of real jobs rather than a service menu. */
+.card.card--photo { padding: 0; overflow: hidden; }
+.card__photo { aspect-ratio: 4/3; background: var(--stone); overflow: hidden; }
+.card__photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.card__photo--soon {
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; padding: 1rem;
+  font-size: .82rem; color: var(--muted);
+  border-bottom: 1px dashed var(--line);
+}
+.card--photo .card__body { padding: 22px 24px 24px; display: flex; flex-direction: column; flex: 1; }
+.card--photo h3 { font-size: var(--step-sub); margin-bottom: .35em; }
+.card--photo p { color: var(--muted); font-size: .95rem; margin: 0; }
+.card--photo .card__foot { margin-top: 1.1rem; padding-top: .9rem; }
+
 /* -------------------------------- Reviews --------------------------------- */
 /* Two real reviews, presented as a pull-quote — one dominant, one
    supporting — instead of a symmetric card grid with two empty seats. */
