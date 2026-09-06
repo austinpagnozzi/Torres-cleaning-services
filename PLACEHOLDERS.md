@@ -2,7 +2,12 @@
 
 Turn on **Highlight placeholder copy** (bottom-right of the page) to see each
 remaining one in context. The counter beside the toggle should read **0** when
-you're done. It currently reads **50**.
+you're done. It currently reads **39**.
+
+Prices and the 24-hour turnaround claim have been removed from the page
+entirely rather than left as placeholders — see the README's "Pricing"
+section. The gallery photography is tracked separately too, in
+`assets/img/generated/README.md`, since it isn't text copy.
 
 ## Already filled in — real, verified from the business's Facebook page
 
@@ -44,13 +49,16 @@ Do not publish a figure you can't back up.
 - `10+` years in business
 - `400+` properties maintained
 - `4.9★` average rating
-- `24hr` estimate turnaround, plus the `usually within 24 hours`, `same business
-  day`, `same-week walk-through` and `same-week start` promises
-- Every price: `$45`/visit, `$180`, `$120`, `$250`, `$150`, and the sample
-  estimate card (`$65`, `$120`, `$180`, and `$425` monthly)
 
-The stats bar is four invented numbers in a row. If real figures aren't
+The stats bar is three invented numbers in a row. If real figures aren't
 available, delete that section rather than soften it.
+
+Two related, softer turnaround claims are still on the page and worth a second
+look even though they're not marked `.ph`: **"Same-week walk-through"** and
+**"Same-week start"** on the hero estimate card, and **"the same business day"**
+on the estimate form. The explicit "24-hour" version of this claim has already
+been removed as unverified (see README) — these are the same kind of promise
+in softer language. Keep, soften further, or remove them the same way.
 
 ### "Licensed and insured" — read this one carefully
 
@@ -75,11 +83,20 @@ or delete the whole `#reviews` section. Do not ship invented reviews.
 to the property types actually serviced. Their Facebook page says "homes and
 businesses" without going further.
 
+### Gallery photography — generated, not real
+
+The hero background, the estimate section's background, and the three "On the
+job" gallery tiles are procedurally generated art in the site's palette, not
+real photographs — no stock-photo host was reachable to source real ones. See
+`assets/img/generated/README.md`. The gallery section has its own `.ph` note
+saying the same thing; remove that note when the photos are swapped.
+
 ## Also before launch
 
 - [ ] Connect the estimate form to a real endpoint (see README)
 - [ ] Swap the placeholder crest SVG for the real logo file
+- [ ] Replace the five generated images with real job photography
 - [ ] Remove the `.ph-bar` toggle, its JS block, and the `.ph` CSS rules
-- [ ] Add real job photography, especially before/after
+- [ ] Decide on the softer turnaround-time language noted above
 - [ ] Add a favicon
 - [ ] Fill in the `og:image` for social sharing previews

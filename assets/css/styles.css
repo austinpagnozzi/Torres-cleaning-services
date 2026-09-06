@@ -295,11 +295,12 @@ body.show-ph .ph {
   overflow: hidden;
   color: rgba(255,255,255,.84);
   background:
-    linear-gradient(103deg, rgba(14,16,19,.97) 0%, rgba(14,16,19,.9) 46%, rgba(23,26,31,.72) 100%),
-    repeating-linear-gradient(58deg, #1d2126 0 26px, #191c21 26px 52px);
+    linear-gradient(103deg, rgba(14,16,19,.94) 0%, rgba(14,16,19,.8) 46%, rgba(23,26,31,.5) 100%),
+    url("../img/generated/hero-lawn.jpg") center 38% / cover no-repeat,
+    #171a1f;
   padding: clamp(56px, 8vw, 104px) 0 clamp(60px, 9vw, 112px);
 }
-/* Soft green light-leak, evoking a lawn edge without needing photography. */
+/* Soft green light-leak, sitting over the lawn photo. */
 .hero::after {
   content: "";
   position: absolute; inset: auto -10% -55% 40%;
@@ -373,15 +374,14 @@ body.show-ph .ph {
   font-size: .92rem; font-weight: 600; color: var(--ink-2);
 }
 .hero-card__row svg { width: 19px; height: 19px; color: var(--green-dark); flex: none; }
-.hero-card__row span:last-child { margin-left: auto; color: var(--green-dark); font-weight: 700; }
+.hero-card__row span { flex: 1; }
+.hero-card__check { margin-left: auto; width: 17px !important; height: 17px !important; }
 .hero-card__foot {
   margin: 18px 0 0;
   padding-top: 16px;
   border-top: 1px dashed var(--line);
-  display: flex; align-items: baseline; justify-content: space-between; gap: 1em;
 }
-.hero-card__foot span { font-size: .84rem; color: var(--muted); font-weight: 600; }
-.hero-card__foot strong { font-family: var(--font-display); font-size: 1.5rem; color: var(--ink); letter-spacing: .01em; }
+.hero-card__foot span { font-size: .86rem; color: var(--muted); font-weight: 600; }
 
 .hero-float {
   position: absolute;
@@ -401,14 +401,14 @@ body.show-ph .ph {
 /* ------------------------------ Stats bar -------------------------------- */
 
 .stats {
-  display: grid; grid-template-columns: repeat(4, 1fr);
+  display: grid; grid-template-columns: repeat(3, 1fr);
   gap: 1px; background: var(--line);
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
 }
-@media (max-width: 740px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 620px) { .stats { grid-template-columns: 1fr; } }
 .stat { background: #fff; padding: 26px 20px; text-align: center; }
 .stat__num {
   font-family: var(--font-display);
@@ -455,11 +455,36 @@ body.show-ph .ph {
 .card__list { margin: 0 0 1.3rem; padding: 0; list-style: none; display: grid; gap: .42em; }
 .card__list li { display: flex; align-items: flex-start; gap: .55em; font-size: .9rem; color: var(--ink-2); }
 .card__list svg { width: 16px; height: 16px; color: var(--green); flex: none; margin-top: .3em; }
-.card__foot { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 1em; padding-top: .9rem; border-top: 1px solid var(--line); }
-.card__price { font-size: .85rem; color: var(--muted); font-weight: 600; }
-.card__price strong { color: var(--ink); font-size: 1rem; }
+.card__foot { margin-top: auto; display: flex; align-items: center; justify-content: flex-end; gap: 1em; padding-top: .9rem; border-top: 1px solid var(--line); }
 .card__link { font-family: var(--font-display); text-transform: uppercase; letter-spacing: .06em; font-weight: 500; font-size: .85rem; text-decoration: none; color: var(--green-dark); white-space: nowrap; }
 .card__link:hover { text-decoration: underline; }
+
+/* -------------------------------- Gallery --------------------------------- */
+
+.gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; }
+.gallery__tile {
+  position: relative;
+  margin: 0;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  aspect-ratio: 4 / 3;
+}
+.gallery__tile img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.gallery__tile::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(0deg, rgba(14,16,19,.82) 0%, rgba(14,16,19,0) 45%);
+}
+.gallery__tile figcaption {
+  position: absolute; left: 18px; right: 18px; bottom: 14px;
+  z-index: 1;
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: .92rem;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
 
 /* -------------------------------- Why us --------------------------------- */
 
@@ -576,7 +601,10 @@ body.show-ph .ph {
 .quote-section {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(150deg, var(--charcoal) 0%, var(--charcoal-3) 70%);
+  background:
+    linear-gradient(150deg, rgba(35,39,46,.94) 0%, rgba(14,16,19,.94) 70%),
+    url("../img/generated/estimate-bg.jpg") center / cover no-repeat,
+    var(--charcoal-3);
   color: rgba(255,255,255,.84);
 }
 .quote-section::after {

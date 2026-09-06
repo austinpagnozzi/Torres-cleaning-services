@@ -17,10 +17,32 @@ const outArg = args.find((a) => !a.startsWith('--'));
 const out = resolve(root, outArg ?? (fragment ? 'dist/torres-homepage.fragment.html' : 'dist/torres-homepage.html'));
 
 const html = await readFile(resolve(root, 'index.html'), 'utf8');
-const css  = await readFile(resolve(root, 'assets/css/styles.css'), 'utf8');
+let css    = await readFile(resolve(root, 'assets/css/styles.css'), 'utf8');
 const js   = await readFile(resolve(root, 'assets/js/main.js'), 'utf8');
 
-let result = html
+// Inline the generated photography as data URIs, referenced from both the
+// stylesheet (relative to assets/css/) and the HTML (relative to the repo
+// root), so the single-file build has no external asset dependencies.
+const mime = (file) => (file.endsWith('.png') ? 'image/png' : 'image/jpeg');
+
+async function dataUri(relativeTo, ref) {
+  const abs = resolve(relativeTo, ref);
+  const buf = await readFile(abs);
+  return `data:${mime(abs)};base64,${buf.toString('base64')}`;
+}
+
+for (const match of [...css.matchAll(/url\("(\.\.\/img\/[^"]+)"\)/g)]) {
+  const uri = await dataUri(resolve(root, 'assets/css'), match[1]);
+  css = css.replace(match[0], `url("${uri}")`);
+}
+
+let html2 = html;
+for (const match of [...html.matchAll(/src="(assets\/img\/[^"]+)"/g)]) {
+  const uri = await dataUri(root, match[1]);
+  html2 = html2.replace(match[0], `src="${uri}"`);
+}
+
+let result = html2
   .replace('<link rel="stylesheet" href="assets/css/styles.css">', `<style>\n${css}\n</style>`)
   .replace('<script src="assets/js/main.js"></script>', `<script>\n${js}\n</script>`);
 

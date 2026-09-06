@@ -5,10 +5,12 @@ Property Maintenance**. Static HTML, one stylesheet, one small script. No build
 step, no framework, no npm install.
 
 ```
-index.html            the page
-assets/css/styles.css all styling
-assets/js/main.js     mobile nav, form mock, placeholder toggle
-assets/img/           drop the real logo here (see below)
+index.html                  the page
+assets/css/styles.css       all styling
+assets/js/main.js           mobile nav, form mock, placeholder toggle
+assets/img/                 drop the real logo here (see below)
+assets/img/generated/       procedurally generated photography (see below)
+scripts/generate_images.py  regenerates the imagery above
 scripts/build-artifact.mjs  inlines everything into one shareable file
 ```
 
@@ -24,8 +26,10 @@ npx http-server -p 8080 .   # then open http://localhost:8080
 
 Contact details, service lines and positioning copy are **real**, taken from the
 business's Facebook About page. Everything still unverified — hours, service
-area, prices, stats, review text and the licensing claims — is wrapped in
-`<span class="ph">`.
+area, stats, review text and the licensing claims — is wrapped in
+`<span class="ph">`. Prices have been removed from the page entirely rather
+than marked as placeholders (see "Pricing" below), and the same goes for the
+turnaround-time claims that used to sit alongside them.
 
 There's a toggle in the bottom-right corner of the page: **Highlight
 placeholder copy**. Flip it on and every one lights up yellow, with a live
@@ -75,13 +79,39 @@ around.
   the banner lettering on the crest; Inter for body copy. Both load from Google
   Fonts with full system fallbacks — the page is designed to survive the fonts
   failing to load.
-- **No photography** is used. The hero uses a sample-estimate card instead of a
-  stock image, so the mockup doesn't depend on photos that don't exist yet.
-  Real job photos would be a strong upgrade — before/after shots especially.
+- **Photography** is procedurally generated, not stock — no stock-photo host
+  was reachable from this build environment (see "The photography" below).
+  Real job photos, before/after especially, would be a strong upgrade.
 - Fully responsive; verified with no horizontal overflow at 1440px and 390px.
   Below 660px a sticky Call / Free Estimate bar pins to the bottom.
 - Respects `prefers-reduced-motion`, has a skip link, labelled form fields, and
   `aria-expanded` wired to the mobile menu.
+
+## Pricing
+
+There are no prices on the page. An earlier draft had per-service placeholder
+prices; they've been removed entirely rather than left as placeholders, since
+a wrong number here is worse than no number — every service card and the hero
+estimate card now just list what's included and point to "Get a quote." Add
+real prices back service-by-service whenever they're settled, or leave the page
+quote-only.
+
+Turnaround-time claims ("24-hour estimate," "within 24 hours") have also been
+removed for the same reason — none were verified. `PLACEHOLDERS.md` still
+flags the softer "same-week" and "same business day" language that remains,
+in case that should go too.
+
+## The photography
+
+Five images live in `assets/img/generated/`: the hero background, the estimate
+section's background, and three tiles in the "On the job" gallery (lawn
+stripes, a trimmed hedge, a mulch bed). Facebook and every stock-photo host
+this build tried (Unsplash, Pexels, Pixabay) are blocked by this environment's
+network policy, so none of them are hotlinked or downloaded photographs —
+they're procedurally rendered in Python (Pillow + numpy) from layered noise,
+tuned to the site's own charcoal-and-green palette rather than borrowed from
+somewhere else. See `assets/img/generated/README.md` for how to regenerate or
+replace them — swapping in real job photos is a same-filename drop-in.
 
 ## The estimate form
 
