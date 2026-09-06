@@ -295,7 +295,7 @@ body.show-ph .ph {
   overflow: hidden;
   color: rgba(255,255,255,.84);
   background:
-    linear-gradient(103deg, rgba(14,16,19,.94) 0%, rgba(14,16,19,.8) 46%, rgba(23,26,31,.5) 100%),
+    linear-gradient(103deg, rgba(14,16,19,.82) 0%, rgba(14,16,19,.62) 46%, rgba(23,26,31,.3) 100%),
     url("../img/generated/hero-lawn.jpg") center 38% / cover no-repeat,
     #171a1f;
   padding: clamp(56px, 8vw, 104px) 0 clamp(60px, 9vw, 112px);
@@ -529,6 +529,13 @@ body.show-ph .ph {
 .promise ul { position: relative; margin: 1.3rem 0 0; padding: 0; list-style: none; display: grid; gap: .8em; }
 .promise li { display: flex; gap: .65em; align-items: flex-start; font-size: .96rem; }
 .promise li svg { width: 19px; height: 19px; color: var(--green); flex: none; margin-top: .25em; }
+
+.commercial-cta { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.commercial-cta .btn { flex: none; }
+@media (max-width: 700px) {
+  .commercial-cta { flex-direction: column; align-items: stretch; text-align: left; }
+  .commercial-cta .btn { width: 100%; }
+}
 
 /* -------------------------------- Process -------------------------------- */
 

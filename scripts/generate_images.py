@@ -127,10 +127,10 @@ def soft_bokeh(img, n=14, seed=2, color=(220, 235, 170), max_r=90, alpha=26):
 #    needed for text contrast, layered on top of this in the stylesheet.
 # ---------------------------------------------------------------------------
 W, H = 2400, 1500
-hero = lawn_base(W, H, seed=11, dark=0.88, sat=0.92, angle=-20, band=70)
+hero = lawn_base(W, H, seed=11, dark=0.98, sat=0.92, angle=-20, band=70)
 hero = hero.filter(ImageFilter.GaussianBlur(2.2))
 hero = soft_bokeh(hero, n=10, seed=5, alpha=16, max_r=140)
-hero = vignette(hero, strength=0.32, feather=1.3)
+hero = vignette(hero, strength=0.24, feather=1.3)
 hero = grain(hero, amount=6, seed=21)
 hero.save(OUT / "hero-lawn.jpg", quality=84)
 print("hero-lawn.jpg", hero.size)
