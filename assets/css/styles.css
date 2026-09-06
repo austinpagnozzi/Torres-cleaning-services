@@ -1,43 +1,59 @@
 /* ==========================================================================
    Torres Cleaning Services — Landscaping & Property Maintenance
-   Homepage mockup stylesheet. No build step, no framework.
+   Spec-pitch rework. Plain HTML, one stylesheet, no build step.
 
-   Palette is drawn from the crest logo: near-black charcoal and off-white,
-   with a grass green brought in as the single accent.
+   Palette: one derived near-black ("ink"), a single accent green reserved
+   for icons/rules/dark-ground text (never small text-on-white — see
+   --green-dark for that), off-white surfaces. Display type is Bitter, a
+   slab serif chosen because the crest's own ribbon lettering is a bold
+   serif, not a condensed sans — see DESIGN_PLAN for the full reasoning.
    ========================================================================== */
 
 :root {
-  /* Crest neutrals */
-  --ink:        #14171b;
-  --ink-2:      #333a40;
-  --muted:      #6a7278;
-  --charcoal:   #23272e;
-  --charcoal-2: #171a1f;
-  --charcoal-3: #0e1013;
+  /* Ink — one derived dark reference (faint green undertone, sampled near
+     the shadow tone in the real job photos) instead of several arbitrary
+     near-blacks. Dark surfaces and overlays are alpha tints of this one
+     value, not separate hex picks. */
+  --ink:        #0d0f0e;
+  --ink-2:      #2c332c;
+  --muted:      #5c6459;
+  --line:       #e1e4dc;
+  --stone:      #f5f6f1;
+  --white:      #ffffff;
 
-  /* Accent */
-  --green:      #5f9e2d;
-  --green-dark: #4a7d22;
-  --green-tint: #eaf2e2;
+  /* Accent. --green is reserved for icons, rules, and dark/photo grounds —
+     at ~3.3:1 on white it fails AA for text, so it never carries text or a
+     button background on a light surface. --green-dark (~4.9:1 on white)
+     is the one interactive color: every link, button, and icon-on-white. */
+  --green:        #5f9e2d;
+  --green-dark:   #4a7d22;
+  --green-darker: #3d6a1c; /* small text on --green-tint needs this, not --green-dark
+                              (4.3:1 on that lighter ground — under AA) */
+  --green-tint:   #eaf2e2;
   --green-tint-2: #f4f8ef;
-  --gold:       #d9a52b;
-
-  /* Surfaces */
-  --white:   #ffffff;
-  --stone:   #f6f7f4;
-  --line:    #e2e5df;
 
   /* Type */
   --font: "Inter", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
-  --font-display: "Oswald", "Haettenschweiler", "Arial Narrow Bold", var(--font);
+  --font-display: "Bitter", Georgia, "Times New Roman", serif;
 
-  /* Space & shape */
+  /* Type scale — a real ratio filling the old h2-to-h3 gap. */
+  --step-cap:  .875rem;                    /* 14px  — labels, captions */
+  --step-body: 1rem;                       /* 17px  — body text */
+  --step-sub:  clamp(1.25rem, 2vw, 1.4rem);   /* 21–22px — card/feature headings */
+  --step-h3:   clamp(1.55rem, 3vw, 1.9rem);   /* 25–30px — subsection headings */
+  --step-h2:   clamp(2.05rem, 4.5vw, 2.75rem); /* 33–44px — section headings */
+  --step-h1:   clamp(2.5rem, 6vw, 3.75rem);    /* 40–60px — page/hero heading */
+
+  /* Shape — three steps plus pill, nothing ad hoc. */
+  --radius-sm: 8px;   /* controls: inputs, small buttons-as-chips, menu rows */
+  --radius-md: 16px;  /* cards, icon badges, panels */
+  --radius-lg: 24px;  /* large photo frames, hero-scale surfaces */
+  --radius-pill: 999px; /* buttons only */
+
   --container: 1160px;
-  --radius:    12px;
-  --radius-lg: 18px;
-  --shadow-sm: 0 1px 2px rgba(20, 23, 27, .06), 0 2px 8px rgba(20, 23, 27, .05);
-  --shadow-md: 0 6px 18px rgba(20, 23, 27, .09), 0 2px 6px rgba(20, 23, 27, .04);
-  --shadow-lg: 0 18px 48px rgba(14, 16, 19, .22);
+  --shadow-sm: 0 1px 2px rgba(13, 15, 14, .06), 0 2px 8px rgba(13, 15, 14, .05);
+  --shadow-md: 0 6px 18px rgba(13, 15, 14, .09), 0 2px 6px rgba(13, 15, 14, .04);
+  --shadow-lg: 0 20px 52px rgba(13, 15, 14, .24);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -58,17 +74,11 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, h4 { margin: 0 0 .5em; color: var(--ink); line-height: 1.15; }
-
-h1, h2 {
-  font-family: var(--font-display);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: .01em;
-}
-h1 { font-size: clamp(2.3rem, 5.4vw, 3.8rem); }
-h2 { font-size: clamp(1.75rem, 3.6vw, 2.6rem); }
-h3 { font-size: 1.16rem; font-weight: 700; letter-spacing: -.01em; }
+h1, h2, h3, h4 { margin: 0 0 .5em; color: var(--ink); line-height: 1.16; font-family: var(--font-display); font-weight: 700; text-wrap: balance; }
+h1 { font-size: var(--step-h1); letter-spacing: -.01em; }
+h2 { font-size: var(--step-h2); letter-spacing: -.01em; }
+h3 { font-size: var(--step-h3); }
+h4 { font-size: var(--step-sub); }
 
 p { margin: 0 0 1rem; }
 a { color: var(--green-dark); }
@@ -78,31 +88,26 @@ img, svg { max-width: 100%; }
 
 .section { padding: clamp(56px, 8vw, 100px) 0; }
 .section--stone { background: var(--stone); }
+.section--ink {
+  background: var(--ink);
+  color: rgba(255,255,255,.82);
+}
+.section--ink h2, .section--ink h3 { color: #fff; }
 
-.section-head { max-width: 680px; margin: 0 auto clamp(34px, 5vw, 56px); text-align: center; }
+.section-head { max-width: 680px; margin: 0 0 clamp(28px, 4vw, 44px); }
 .section-head p { color: var(--muted); font-size: 1.06rem; margin-bottom: 0; }
+.section-head--center { margin-inline: auto; text-align: center; }
 
-.eyebrow {
-  display: inline-block;
-  font-family: var(--font-display);
-  font-size: .82rem;
-  font-weight: 600;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: var(--green-dark);
-  margin-bottom: .6rem;
-}
-
-.rule {
-  width: 62px; height: 3px;
-  background: var(--green);
-  border: 0;
-  margin: 0 auto 1.1rem;
-}
-.section-head--left { margin-inline: 0; text-align: left; }
-.section-head--left .rule { margin-inline: 0; }
+/* No eyebrow-and-rule component. Section identity comes from the type
+   scale and layout shape, not a small-caps kicker line repeated on every
+   section — the one exception is the numbered process steps, which are a
+   genuine sequence. */
 
 /* ------------------------------ Buttons -------------------------------- */
+/* Pill-shaped — a clearly different silhouette from the rounded-rectangle
+   cards, and a single deliberate choice rather than one more radius value.
+   No hover-lift/shadow-grow: the only motion left is a background-color
+   change, which is state feedback, not ambient animation. */
 
 .btn {
   display: inline-flex;
@@ -111,76 +116,45 @@ img, svg { max-width: 100%; }
   gap: .55em;
   padding: .9em 1.7em;
   border: 1px solid transparent;
-  border-radius: 6px;
+  border-radius: var(--radius-pill);
   font-family: var(--font-display);
   font-size: .96rem;
-  font-weight: 500;
-  letter-spacing: .07em;
-  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: .01em;
   line-height: 1.2;
   text-decoration: none;
   cursor: pointer;
-  transition: transform .15s ease, background-color .15s ease, box-shadow .15s ease, color .15s ease;
+  transition: background-color .15s ease, border-color .15s ease, color .15s ease;
 }
-.btn:hover  { transform: translateY(-1px); }
-.btn:active { transform: translateY(0); }
 .btn:focus-visible { outline: 3px solid var(--green); outline-offset: 3px; }
 .btn svg { width: 18px; height: 18px; flex: none; }
 
-.btn--primary { background: var(--green); color: #fff; box-shadow: var(--shadow-md); }
-.btn--primary:hover { background: var(--green-dark); }
+.btn--primary { background: var(--green-dark); color: #fff; }
+.btn--primary:hover { background: #3d6a1c; }
 
-.btn--dark { background: var(--charcoal); color: #fff; box-shadow: var(--shadow-md); }
-.btn--dark:hover { background: var(--charcoal-2); }
+.btn--dark { background: var(--ink); color: #fff; }
+.btn--dark:hover { background: #000; }
 
 .btn--ghost { background: transparent; color: var(--ink); border-color: var(--line); }
 .btn--ghost:hover { background: var(--stone); border-color: #cfd4ca; }
 
-.btn--on-dark { background: rgba(255,255,255,.1); color: #fff; border-color: rgba(255,255,255,.42); }
-.btn--on-dark:hover { background: rgba(255,255,255,.2); }
+.btn--on-dark { background: rgba(255,255,255,.12); color: #fff; border-color: rgba(255,255,255,.4); }
+.btn--on-dark:hover { background: rgba(255,255,255,.22); }
 
 .btn--lg { padding: 1.05em 2em; font-size: 1.02rem; }
 .btn--block { width: 100%; }
 
 /* ---------------------------- Placeholders ------------------------------ */
-/* Any copy still waiting on a real business detail is wrapped in .ph so it
-   can be found — and visibly flagged — before this goes anywhere near live. */
-
+/* Every piece of copy still waiting on a real business detail is wrapped in
+   .ph. The marking system stays in the source so it's still greppable and
+   auditable — `grep -n 'class="ph"'` — but the visible toggle widget that
+   used to sit over the page has been removed from this build; a prospect
+   should never see a control labelled "highlight placeholder copy." */
 .ph { font-style: normal; }
-body.show-ph .ph {
-  background: #fff3c4;
-  box-shadow: 0 0 0 2px #fff3c4;
-  border-radius: 3px;
-  outline: 1px dashed #bf931a;
-}
-
-.ph-bar {
-  position: fixed;
-  right: 16px; bottom: 16px;
-  z-index: 90;
-  display: flex;
-  align-items: center;
-  gap: .7em;
-  padding: .55em .95em .55em .8em;
-  background: var(--charcoal-3);
-  color: #fff;
-  border-radius: 999px;
-  box-shadow: var(--shadow-lg);
-  font-size: .82rem;
-  font-weight: 600;
-}
-.ph-bar label { display: inline-flex; align-items: center; gap: .5em; cursor: pointer; }
-.ph-bar input { accent-color: var(--green); width: 15px; height: 15px; cursor: pointer; }
-.ph-bar .ph-count {
-  background: rgba(255,255,255,.16);
-  border-radius: 999px;
-  padding: .1em .65em;
-  font-variant-numeric: tabular-nums;
-}
 
 /* ------------------------------- Header --------------------------------- */
 
-.topbar { background: var(--charcoal-3); color: rgba(255,255,255,.82); font-size: .85rem; }
+.topbar { background: var(--ink); color: rgba(255,255,255,.82); font-size: .85rem; }
 .topbar__inner {
   display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
   gap: .4em 1.4em; padding-block: .6em;
@@ -202,7 +176,7 @@ body.show-ph .ph {
 
 .brand { display: inline-flex; align-items: center; gap: .8em; text-decoration: none; }
 .brand > span { display: block; }
-.brand__crest { width: 46px; height: 51px; flex: none; color: var(--charcoal); object-fit: contain; border-radius: 6px; }
+.brand__crest { width: 46px; height: 51px; flex: none; color: var(--ink); object-fit: contain; border-radius: var(--radius-sm); }
 
 /* A small white mount behind the crest photo so it reads as a patch rather
    than a floating image cutout wherever it sits on a dark background. */
@@ -210,28 +184,25 @@ body.show-ph .ph {
   display: inline-flex; flex: none;
   padding: 5px;
   background: #fff;
-  border-radius: 9px;
+  border-radius: var(--radius-sm);
   box-shadow: var(--shadow-sm);
 }
 .brand__name {
   font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 1.14rem;
-  text-transform: uppercase;
-  letter-spacing: .06em;
+  font-weight: 700;
+  font-size: 1.1rem;
   color: var(--ink);
   line-height: 1.1;
   white-space: nowrap;
 }
 .brand__tag {
   display: block;
-  font-family: var(--font-display);
   font-size: .64rem;
-  font-weight: 400;
-  letter-spacing: .17em;
+  font-weight: 600;
+  letter-spacing: .13em;
   text-transform: uppercase;
   color: var(--green-dark);
-  margin-top: .15em;
+  margin-top: .2em;
   white-space: nowrap;
 }
 
@@ -239,11 +210,8 @@ body.show-ph .ph {
 .nav__list { display: flex; align-items: center; gap: 1.4rem; margin: 0; padding: 0; list-style: none; }
 .nav__list a {
   text-decoration: none;
-  font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 600;
   font-size: .93rem;
-  letter-spacing: .07em;
-  text-transform: uppercase;
   color: var(--ink-2);
   padding: .35em 0;
   border-bottom: 2px solid transparent;
@@ -258,11 +226,8 @@ body.show-ph .ph {
   display: flex; align-items: center; gap: .35em;
   cursor: pointer;
   list-style: none;
-  font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 600;
   font-size: .93rem;
-  letter-spacing: .07em;
-  text-transform: uppercase;
   color: var(--ink-2);
   padding: .35em 0;
   border-bottom: 2px solid transparent;
@@ -280,25 +245,21 @@ body.show-ph .ph {
   padding: 8px;
   background: #fff;
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   box-shadow: var(--shadow-md);
   z-index: 90;
 }
 .nav-dropdown__panel a {
   padding: .65em .8em;
-  border-radius: 8px;
-  border-bottom: none;
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: .82rem;
-  letter-spacing: .05em;
-  text-transform: uppercase;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: .89rem;
   color: var(--ink-2);
   text-decoration: none;
   white-space: nowrap;
 }
 .nav-dropdown__panel a:hover { background: var(--stone); color: var(--ink); }
-.nav-dropdown__panel a.is-overview { color: var(--green-dark); border-bottom: 1px solid var(--line); border-radius: 8px 8px 0 0; margin-bottom: 4px; padding-bottom: .8em; }
+.nav-dropdown__panel a.is-overview { color: var(--green-dark); border-bottom: 1px solid var(--line); border-radius: var(--radius-sm) var(--radius-sm) 0 0; margin-bottom: 4px; padding-bottom: .8em; }
 
 /* On phones the four-item top bar ate ~240px above the fold; keep the two
    items a visitor actually taps and drop the informational pair. */
@@ -311,8 +272,8 @@ body.show-ph .ph {
 /* The no-wrap brand lockup needs to shrink to clear the menu button on phones. */
 @media (max-width: 620px) {
   .brand__crest { width: 36px; height: 42px; }
-  .brand__name  { font-size: .88rem; letter-spacing: .04em; }
-  .brand__tag   { font-size: .56rem; letter-spacing: .11em; white-space: normal; }
+  .brand__name  { font-size: .92rem; }
+  .brand__tag   { font-size: .58rem; white-space: normal; }
   .site-header__inner { min-height: 68px; }
 }
 
@@ -322,7 +283,7 @@ body.show-ph .ph {
   align-items: center; justify-content: center;
   background: transparent;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
   color: var(--ink);
 }
@@ -357,202 +318,207 @@ body.show-ph .ph {
 }
 
 /* -------------------------------- Hero ---------------------------------- */
+/* Full-bleed real job photo. No synthetic estimate-card widget, no floating
+   badge chips — the photo is the credibility, given real scale. A simple
+   two-stop gradient carries the text contrast instead of the old four-stop
+   treatment. */
 
 .hero {
   position: relative;
   overflow: hidden;
-  color: rgba(255,255,255,.84);
+  color: rgba(255,255,255,.86);
   background:
-    linear-gradient(103deg, rgba(14,16,19,.82) 0%, rgba(14,16,19,.62) 46%, rgba(23,26,31,.3) 100%),
+    linear-gradient(90deg, rgba(13,15,14,.90) 0%, rgba(13,15,14,.50) 72%),
     url("../img/photos/hero-lawn-farmhouse.jpg") center 32% / cover no-repeat,
-    #171a1f;
-  padding: clamp(56px, 8vw, 104px) 0 clamp(60px, 9vw, 112px);
-}
-/* Soft green light-leak, sitting over the lawn photo. */
-.hero::after {
-  content: "";
-  position: absolute; inset: auto -10% -55% 40%;
-  height: 78%;
-  background: radial-gradient(60% 60% at 50% 50%, rgba(95,158,45,.36) 0%, transparent 70%);
-  pointer-events: none;
+    #14160f;
+  padding: clamp(72px, 12vw, 152px) 0 clamp(64px, 9vw, 108px);
 }
 
-.hero__grid {
-  position: relative; z-index: 1;
-  display: grid;
-  grid-template-columns: 1.1fr .9fr;
-  gap: clamp(36px, 5vw, 68px);
-  align-items: center;
-}
-@media (max-width: 940px) { .hero__grid { grid-template-columns: 1fr; } }
-
-.hero__badge {
-  display: inline-flex; align-items: center; gap: .6em;
-  padding: .42em 1em .42em .55em;
-  background: rgba(255,255,255,.08);
-  border: 1px solid rgba(255,255,255,.2);
-  border-radius: 999px;
-  font-size: .85rem; font-weight: 600; color: #fff;
-  margin-bottom: 1.3rem;
-}
-.hero__badge .stars { display: inline-flex; gap: 1px; color: var(--gold); }
-.hero__badge svg { width: 15px; height: 15px; }
-
-.hero__title { color: #fff; margin-bottom: .55em; }
-.hero__title .accent { color: var(--green); }
-
-.hero__lede { font-size: 1.14rem; color: rgba(255,255,255,.78); max-width: 50ch; margin-bottom: 1.9rem; }
-.hero__cta { display: flex; flex-wrap: wrap; gap: .85rem; margin-bottom: 2rem; }
+.hero__copy { position: relative; z-index: 1; max-width: 40rem; }
+.hero__title { color: #fff; margin-bottom: .5em; }
+.hero__lede { font-size: 1.16rem; color: rgba(255,255,255,.82); max-width: 46ch; margin-bottom: 2rem; }
+.hero__cta { display: flex; flex-wrap: wrap; gap: .85rem; margin-bottom: 2.2rem; }
 
 .hero__points {
   display: flex; flex-wrap: wrap; gap: .7em 1.7em;
   margin: 0; padding: 1.5rem 0 0; list-style: none;
-  border-top: 1px solid rgba(255,255,255,.14);
+  border-top: 1px solid rgba(255,255,255,.16);
 }
-.hero__points li { display: inline-flex; align-items: center; gap: .5em; font-size: .92rem; font-weight: 600; color: rgba(255,255,255,.9); }
+.hero__points li { display: inline-flex; align-items: center; gap: .5em; font-size: .92rem; font-weight: 600; color: rgba(255,255,255,.92); }
 .hero__points svg { width: 19px; height: 19px; color: var(--green); flex: none; }
 
-/* Hero card — an estimate summary, standing in for a project photo. */
-.hero__visual { position: relative; }
-.hero-card {
-  position: relative;
-  z-index: 2;
+/* --------------------------- Credibility band ---------------------------- */
+/* Replaces the old three-cell stats grid. Asymmetric: the crest rendered
+   large as a real design element, paired with an owner's-voice statement
+   rather than three unverifiable numbers. */
+
+.credibility {
+  background: var(--ink);
+  color: rgba(255,255,255,.86);
+}
+.credibility__grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: clamp(28px, 5vw, 56px);
+  align-items: center;
+}
+@media (max-width: 780px) {
+  .credibility__grid { grid-template-columns: 1fr; text-align: center; }
+  .credibility__crest-mount { margin-inline: auto; }
+}
+/* The crest photo has a filled cream background, not a transparent one, so
+   recoloring it (e.g. brightness/invert) turns the whole frame into a solid
+   block instead of a legible mark. Mounted on its own white card at real
+   scale instead — the crest as a genuine design element, not a filter trick. */
+.credibility__crest-mount {
+  flex: none;
+  width: clamp(120px, 13vw, 168px);
+  padding: 14px;
   background: #fff;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   box-shadow: var(--shadow-lg);
-  padding: 26px;
-  color: var(--ink-2);
 }
-.hero-card__top {
-  display: flex; align-items: center; gap: .8em;
-  padding-bottom: 16px; margin-bottom: 16px;
-  border-bottom: 1px solid var(--line);
-}
-.hero-card__top .brand__crest { width: 38px; height: 45px; }
-.hero-card__top > span { display: block; }
-.hero-card__title { display: block; font-family: var(--font-display); text-transform: uppercase; letter-spacing: .05em; font-size: 1rem; color: var(--ink); line-height: 1.2; }
-.hero-card__sub { display: block; font-size: .78rem; color: var(--muted); }
-
-.hero-card__rows { display: grid; gap: 10px; }
-.hero-card__row {
-  display: flex; align-items: center; gap: .75em;
-  padding: 12px 14px;
-  background: var(--stone);
-  border-radius: 9px;
-  font-size: .92rem; font-weight: 600; color: var(--ink-2);
-}
-.hero-card__row svg { width: 19px; height: 19px; color: var(--green-dark); flex: none; }
-.hero-card__row span { flex: 1; }
-.hero-card__check { margin-left: auto; width: 17px !important; height: 17px !important; }
-.hero-card__foot {
-  margin: 18px 0 0;
-  padding-top: 16px;
-  border-top: 1px dashed var(--line);
-}
-.hero-card__foot span { font-size: .86rem; color: var(--muted); font-weight: 600; }
-
-.hero-float {
-  position: absolute;
-  z-index: 3;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: var(--shadow-md);
-  padding: .7em 1em;
-  font-size: .8rem; font-weight: 700; color: var(--ink);
-  display: flex; align-items: center; gap: .6em;
-}
-.hero-float svg { width: 18px; height: 18px; color: var(--green); }
-.hero-float--tl { top: -16px; left: -20px; }
-.hero-float--br { bottom: -18px; right: -16px; }
-@media (max-width: 1120px) { .hero-float--tl, .hero-float--br { display: none; } }
-
-/* ------------------------------ Stats bar -------------------------------- */
-
-.stats {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 1px; background: var(--line);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: var(--shadow-sm);
-}
-@media (max-width: 620px) { .stats { grid-template-columns: 1fr; } }
-.stat { background: #fff; padding: 26px 20px; text-align: center; }
-.stat__num {
+.credibility__crest { width: 100%; height: auto; display: block; }
+.credibility blockquote {
+  margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(1.7rem, 3.6vw, 2.3rem);
-  font-weight: 600;
-  color: var(--green-dark);
-  line-height: 1.1;
+  font-size: clamp(1.3rem, 2.6vw, 1.7rem);
+  font-weight: 500;
+  line-height: 1.5;
+  color: #fff;
 }
-.stat__label { font-size: .85rem; color: var(--muted); font-weight: 600; }
+.credibility blockquote strong { font-weight: 700; }
+.credibility figcaption {
+  margin-top: 1.1rem;
+  font-size: .95rem;
+  color: rgba(255,255,255,.62);
+  display: flex;
+  align-items: center;
+  gap: .6em;
+}
+.credibility figcaption::before {
+  content: "";
+  width: 22px; height: 2px; flex: none;
+  background: currentColor;
+  opacity: .6;
+}
+.credibility figcaption span { color: #fff; font-weight: 700; }
 
 /* ------------------------------- Services -------------------------------- */
+/* Flat, bordered — no shadow, no hover lift. A grid is the honest shape for
+   a menu of distinct offerings, so it stays a grid; it just doesn't try to
+   look like every other card on the page too. */
 
 .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(292px, 1fr)); gap: 22px; }
 .card {
-  position: relative;
   background: #fff;
   border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   padding: 28px 26px;
-  box-shadow: var(--shadow-sm);
-  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
   display: flex; flex-direction: column;
-  overflow: hidden;
 }
-.card::before {
-  content: "";
-  position: absolute; top: 0; left: 0; right: 0; height: 3px;
-  background: var(--green);
-  transform: scaleX(0); transform-origin: left;
-  transition: transform .22s ease;
-}
-.card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: #cfd8c4; }
-.card:hover::before { transform: scaleX(1); }
-
 .card__icon {
   width: 52px; height: 52px;
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   background: var(--green-tint);
   display: grid; place-items: center;
   margin-bottom: 16px;
 }
 .card__icon svg { width: 27px; height: 27px; color: var(--green-dark); }
+.card h3 { font-size: var(--step-sub); }
 .card p { color: var(--muted); font-size: .95rem; margin-bottom: 1.1rem; }
 .card__list { margin: 0 0 1.3rem; padding: 0; list-style: none; display: grid; gap: .42em; }
 .card__list li { display: flex; align-items: flex-start; gap: .55em; font-size: .9rem; color: var(--ink-2); }
-.card__list svg { width: 16px; height: 16px; color: var(--green); flex: none; margin-top: .3em; }
+.card__list svg { width: 16px; height: 16px; color: var(--green-dark); flex: none; margin-top: .3em; }
 .card__foot { margin-top: auto; display: flex; align-items: center; justify-content: flex-end; gap: 1em; padding-top: .9rem; border-top: 1px solid var(--line); }
-.card__link { font-family: var(--font-display); text-transform: uppercase; letter-spacing: .06em; font-weight: 500; font-size: .85rem; text-decoration: none; color: var(--green-dark); white-space: nowrap; }
+.card__link { font-weight: 700; font-size: .89rem; text-decoration: none; color: var(--green-dark); white-space: nowrap; }
 .card__link:hover { text-decoration: underline; }
 
-/* -------------------------------- Gallery --------------------------------- */
+/* Photo-fronted variant — completed-work thumbnail instead of an icon, for
+   a grid that reads as a gallery of real jobs rather than a service menu. */
+.card.card--photo { padding: 0; overflow: hidden; }
+.card__photo { aspect-ratio: 4/3; background: var(--stone); overflow: hidden; }
+.card__photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.card__photo--soon {
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; padding: 1rem;
+  font-size: .82rem; color: var(--muted);
+  border-bottom: 1px dashed var(--line);
+}
+.card--photo .card__body { padding: 22px 24px 24px; display: flex; flex-direction: column; flex: 1; }
+.card--photo h3 { font-size: var(--step-sub); margin-bottom: .35em; }
+.card--photo p { color: var(--muted); font-size: .95rem; margin: 0; }
+.card--photo .card__foot { margin-top: 1.1rem; padding-top: .9rem; }
 
-.gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; }
-.gallery__tile {
-  position: relative;
-  margin: 0;
+/* -------------------------------- Reviews --------------------------------- */
+/* Two real reviews, presented as a pull-quote — one dominant, one
+   supporting — instead of a symmetric card grid with two empty seats. */
+
+.testimonial {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: clamp(32px, 5vw, 60px);
+  align-items: start;
+}
+@media (max-width: 860px) { .testimonial { grid-template-columns: 1fr; } }
+
+/* Both quotes sit in a solid green block for real visual weight. Same
+   green for both; the dominant/supporting split comes from size and type
+   scale (grid columns above, smaller quote and avatar below), not a
+   lighter shade — a lighter green would drop white text below AA. */
+.pull-quote, .support-quote {
+  background: var(--green-dark);
   border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: var(--shadow-sm);
-  aspect-ratio: 4 / 3;
+  color: rgba(255,255,255,.92);
 }
-.gallery__tile img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.gallery__tile::after {
-  content: "";
-  position: absolute; inset: 0;
-  background: linear-gradient(0deg, rgba(14,16,19,.82) 0%, rgba(14,16,19,0) 45%);
-}
-.gallery__tile figcaption {
-  position: absolute; left: 18px; right: 18px; bottom: 14px;
-  z-index: 1;
-  color: #fff;
+
+.pull-quote { padding: clamp(30px, 4vw, 44px); }
+.pull-quote blockquote {
+  margin: 0 0 1.1rem;
   font-family: var(--font-display);
-  font-size: .92rem;
-  letter-spacing: .05em;
-  text-transform: uppercase;
+  font-size: clamp(1.6rem, 3.2vw, 2.15rem);
+  font-weight: 600;
+  line-height: 1.35;
+  color: #fff;
 }
+.pull-quote figcaption { display: flex; align-items: center; gap: .8em; }
+.pull-quote__avatar {
+  width: 48px; height: 48px; flex: none;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--green-dark);
+  display: grid; place-items: center;
+  font-family: var(--font-display); font-weight: 700; font-size: 1.05rem;
+}
+.pull-quote__who { display: block; font-weight: 700; color: #fff; }
+.pull-quote__where { display: block; font-size: .87rem; color: rgba(255,255,255,.72); }
+
+.support-quote { padding: clamp(24px, 3.2vw, 34px); }
+.support-quote blockquote { margin: 0 0 1rem; font-size: 1.05rem; color: rgba(255,255,255,.94); }
+.support-quote figcaption { display: flex; align-items: center; gap: .7em; }
+.support-quote__avatar {
+  width: 40px; height: 40px; flex: none;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--green-dark);
+  display: grid; place-items: center;
+  font-family: var(--font-display); font-weight: 700; font-size: .92rem;
+}
+.support-quote__who { display: block; font-weight: 700; color: #fff; font-size: .95rem; }
+.support-quote__where { display: block; font-size: .84rem; color: rgba(255,255,255,.72); }
+
+.recommends-badge {
+  display: inline-flex; align-items: center; gap: .4em;
+  padding: .3em .75em .3em .55em;
+  margin-bottom: 1rem;
+  background: #fff;
+  color: var(--green-dark);
+  border-radius: var(--radius-pill);
+  font-size: .78rem; font-weight: 700;
+}
+.recommends-badge svg { width: 14px; height: 14px; }
+
+.testimonial-foot { margin-top: 1.8rem; font-size: .95rem; color: var(--muted); }
 
 /* -------------------------------- Why us --------------------------------- */
 
@@ -563,25 +529,24 @@ body.show-ph .ph {
 .feature { display: flex; gap: 1rem; align-items: flex-start; }
 .feature__icon {
   width: 46px; height: 46px; flex: none;
-  border-radius: 11px;
+  border-radius: var(--radius-md);
   background: var(--green-tint);
   display: grid; place-items: center;
 }
 .feature__icon svg { width: 23px; height: 23px; color: var(--green-dark); }
-.feature h3 { margin-bottom: .25em; font-size: 1.04rem; }
+.feature h3 { margin-bottom: .25em; font-size: var(--step-sub); }
 .feature p { margin: 0; color: var(--muted); font-size: .94rem; }
 
 .promise {
-  background: linear-gradient(155deg, var(--charcoal) 0%, var(--charcoal-3) 100%);
+  background: var(--ink);
   color: rgba(255,255,255,.86);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   padding: clamp(30px, 4vw, 44px);
-  box-shadow: var(--shadow-lg);
 }
 .promise__head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
 .promise__crest { flex: none; }
-.promise h3 { color: #fff; font-family: var(--font-display); text-transform: uppercase; letter-spacing: .05em; font-size: 1.4rem; display: flex; align-items: center; gap: .5em; }
-.promise h3 svg { width: 26px; height: 26px; color: var(--green); flex: none; }
+.promise h3 { color: #fff; font-size: 1.3rem; display: flex; align-items: center; gap: .5em; }
+.promise h3 svg { width: 24px; height: 24px; color: var(--green); flex: none; }
 .promise ul { margin: 1.3rem 0 0; padding: 0; list-style: none; display: grid; gap: .8em; }
 .promise li { display: flex; gap: .65em; align-items: flex-start; font-size: .96rem; }
 .promise li svg { width: 19px; height: 19px; color: var(--green); flex: none; margin-top: .25em; }
@@ -594,6 +559,7 @@ body.show-ph .ph {
 }
 
 /* -------------------------------- Process -------------------------------- */
+/* The one place numbered markers stay — this genuinely is a sequence. */
 
 .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
 @media (max-width: 820px) { .steps { grid-template-columns: 1fr; } }
@@ -601,14 +567,15 @@ body.show-ph .ph {
 .step__num {
   width: 50px; height: 50px;
   border-radius: 50%;
-  background: var(--charcoal);
+  background: var(--ink);
   color: #fff;
   display: grid; place-items: center;
   font-family: var(--font-display);
-  font-weight: 600; font-size: 1.2rem;
+  font-weight: 700; font-size: 1.2rem;
   margin-bottom: 16px;
   box-shadow: 0 0 0 6px var(--green-tint);
 }
+.step h3 { font-size: var(--step-sub); }
 .step p { color: var(--muted); font-size: .95rem; margin: 0; }
 .step::after {
   content: "";
@@ -618,75 +585,49 @@ body.show-ph .ph {
 .step:last-child::after { display: none; }
 @media (max-width: 820px) { .step::after { display: none; } }
 
-/* ------------------------------ Testimonials ----------------------------- */
+/* ------------------------------ Service area ----------------------------- */
+/* A split layout: the statement on one side, a bordered panel of towns
+   (plain list with a pin mark, not pill chips) on the other — a different
+   shape from the cards/quotes above it, with real visual weight. */
 
-.quotes { display: grid; grid-template-columns: repeat(auto-fit, minmax(282px, 1fr)); gap: 22px; }
-.quote {
-  background: #fff;
+.area-block { display: grid; grid-template-columns: 1fr .9fr; gap: clamp(32px, 5vw, 64px); align-items: center; }
+@media (max-width: 860px) { .area-block { grid-template-columns: 1fr; } }
+
+.area-block__lede { font-size: 1.15rem; color: var(--ink-2); max-width: 46ch; margin-bottom: 1.4rem; }
+.area-block__lede strong { color: var(--ink); }
+.area-block__note { color: var(--muted); margin: 0 0 1.4rem; max-width: 46ch; }
+
+.area-list {
+  list-style: none;
+  margin: 0; padding: clamp(22px, 3vw, 30px);
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: .75em 1.5em;
+  background: var(--stone);
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
-  padding: 28px 26px;
-  box-shadow: var(--shadow-sm);
-  display: flex; flex-direction: column;
 }
-.quote .stars { display: inline-flex; gap: 2px; color: var(--gold); margin-bottom: .8rem; }
-.quote .stars svg { width: 17px; height: 17px; }
-.quote__badge {
-  display: inline-flex; align-items: center; gap: .4em;
-  padding: .35em .8em .35em .6em;
-  margin-bottom: .9rem;
-  background: var(--green-tint);
-  color: var(--green-dark);
-  border-radius: 999px;
-  font-size: .82rem; font-weight: 700;
-}
-.quote__badge svg { width: 15px; height: 15px; }
-.quote blockquote { margin: 0 0 1.4rem; font-size: 1rem; color: var(--ink-2); }
-.quote figcaption { margin-top: auto; display: flex; align-items: center; gap: .75em; }
-.quote__avatar {
-  width: 44px; height: 44px; flex: none;
-  border-radius: 50%;
-  background: var(--green-tint);
-  color: var(--green-dark);
-  display: grid; place-items: center;
-  font-family: var(--font-display); font-weight: 600; font-size: 1rem;
-}
-.quote__who   { display: block; font-weight: 700; color: var(--ink); font-size: .95rem; line-height: 1.3; }
-.quote__where { display: block; font-size: .84rem; color: var(--muted); }
+.area-list li { display: flex; align-items: center; gap: .55em; font-weight: 600; color: var(--ink-2); }
+.area-list svg { width: 17px; height: 17px; color: var(--green-dark); flex: none; }
 
-/* ------------------------------ Service area ----------------------------- */
-
-.areas { display: flex; flex-wrap: wrap; gap: .65em; justify-content: center; margin: 0; padding: 0; list-style: none; }
-.areas li {
-  display: inline-flex; align-items: center; gap: .5em;
-  background: #fff;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: .6em 1.2em;
-  font-size: .92rem; font-weight: 600; color: var(--ink-2);
-  box-shadow: var(--shadow-sm);
-}
-.areas svg { width: 16px; height: 16px; color: var(--green); flex: none; }
-.areas-note { text-align: center; color: var(--muted); font-size: .93rem; margin: 1.7rem 0 0; }
-
-/* --------------------------------- Quote --------------------------------- */
+/* --------------------------------- Closing CTA ---------------------------- */
 
 .quote-section {
   position: relative;
   overflow: hidden;
   background:
-    linear-gradient(150deg, rgba(35,39,46,.94) 0%, rgba(14,16,19,.94) 70%),
+    linear-gradient(150deg, rgba(30,33,28,.94) 0%, rgba(13,15,14,.95) 70%),
     url("../img/photos/backyard-mulch-fence.jpg") center 65% / cover no-repeat,
-    var(--charcoal-3);
+    var(--ink);
   color: rgba(255,255,255,.84);
 }
 .quote-section::after {
   content: "";
   position: absolute; inset: -30% 55% auto -20%; height: 90%;
-  background: radial-gradient(50% 50% at 50% 50%, rgba(95,158,45,.3) 0%, transparent 70%);
+  background: radial-gradient(50% 50% at 50% 50%, rgba(95,158,45,.28) 0%, transparent 70%);
   pointer-events: none;
 }
 .quote-section h2 { color: #fff; }
+.quote-section .section-head p { color: rgba(255,255,255,.78); }
 .quote-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1.05fr; gap: clamp(34px, 5vw, 62px); align-items: start; }
 @media (max-width: 940px) { .quote-grid { grid-template-columns: 1fr; } }
 
@@ -694,15 +635,14 @@ body.show-ph .ph {
 .contact-list > div { display: flex; gap: .9em; align-items: flex-start; }
 .contact-list .ico {
   width: 42px; height: 42px; flex: none;
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   background: rgba(255,255,255,.1);
   display: grid; place-items: center;
 }
 .contact-list svg { width: 20px; height: 20px; color: var(--green); }
 .contact-list dt {
-  font-family: var(--font-display);
-  font-size: .72rem; text-transform: uppercase; letter-spacing: .14em;
-  font-weight: 400; color: rgba(255,255,255,.55);
+  font-size: .72rem; text-transform: uppercase; letter-spacing: .1em;
+  font-weight: 700; color: rgba(255,255,255,.55);
 }
 .contact-list dd { margin: 0; font-weight: 600; color: #fff; font-size: 1.02rem; }
 .contact-list a { color: #fff; text-decoration: none; }
@@ -710,13 +650,14 @@ body.show-ph .ph {
 
 .form-card {
   background: #fff;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   padding: clamp(26px, 4vw, 38px);
   box-shadow: var(--shadow-lg);
   color: var(--ink-2);
 }
-.form-card h3 { font-family: var(--font-display); text-transform: uppercase; letter-spacing: .04em; font-size: 1.35rem; font-weight: 600; margin-bottom: .2em; }
+.form-card h3 { font-size: 1.35rem; margin-bottom: .2em; }
 .form-card > p { color: var(--muted); font-size: .93rem; margin-bottom: 1.5rem; }
+.form-card .form-note-top { font-size: .85rem; color: var(--muted); margin: -.9rem 0 1.3rem; }
 
 .field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 14px; }
 @media (max-width: 540px) { .field-grid { grid-template-columns: 1fr; } }
@@ -727,7 +668,7 @@ body.show-ph .ph {
   font: inherit; font-size: .95rem;
   padding: .74em .9em;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   background: var(--stone);
   color: var(--ink);
   width: 100%;
@@ -735,7 +676,7 @@ body.show-ph .ph {
 .field textarea { resize: vertical; min-height: 92px; }
 .field input:focus, .field select:focus, .field textarea:focus {
   outline: none;
-  border-color: var(--green);
+  border-color: var(--green-dark);
   background: #fff;
   box-shadow: 0 0 0 3px var(--green-tint);
 }
@@ -744,17 +685,17 @@ body.show-ph .ph {
 .form-status {
   margin: 1rem 0 0;
   padding: .85em 1em;
-  border-radius: 9px;
+  border-radius: var(--radius-sm);
   background: var(--green-tint);
   border: 1px solid #c8dbb5;
-  color: var(--green-dark);
+  color: var(--green-darker);
   font-size: .9rem; font-weight: 600;
 }
 .form-status[hidden] { display: none; }
 
 /* -------------------------------- Footer --------------------------------- */
 
-.site-footer { background: var(--charcoal-3); color: rgba(255,255,255,.62); font-size: .93rem; }
+.site-footer { background: var(--ink); color: rgba(255,255,255,.62); font-size: .93rem; }
 .site-footer .brand__crest { color: #fff; }
 .footer-grid {
   display: grid; grid-template-columns: 1.6fr 1fr 1fr 1.2fr; gap: 38px;
@@ -766,8 +707,9 @@ body.show-ph .ph {
 .site-footer .brand__name { color: #fff; }
 .site-footer h4 {
   color: #fff;
-  font-family: var(--font-display); font-weight: 400;
-  font-size: .82rem; letter-spacing: .16em; text-transform: uppercase;
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: .8rem; letter-spacing: .1em; text-transform: uppercase;
   margin-bottom: 1.15rem;
 }
 .footer-list { margin: 0; padding: 0; list-style: none; display: grid; gap: .58em; }
@@ -776,7 +718,7 @@ body.show-ph .ph {
 .footer-about { margin-top: 1.1rem; max-width: 36ch; }
 
 .social { display: flex; gap: .6em; margin-top: 1.2rem; }
-.social a { width: 42px; height: 42px; border-radius: 10px; background: rgba(255,255,255,.08); display: grid; place-items: center; color: #fff; }
+.social a { width: 42px; height: 42px; border-radius: var(--radius-md); background: rgba(255,255,255,.08); display: grid; place-items: center; color: #fff; }
 .social a:hover { background: var(--green-dark); }
 .social svg { width: 19px; height: 19px; }
 
@@ -804,13 +746,12 @@ body.show-ph .ph {
   }
   .call-bar .btn { padding: .85em 1em; font-size: .9rem; }
   body { padding-bottom: 78px; }
-  .ph-bar { bottom: 86px; }
 }
 
 .skip-link {
   position: absolute; left: -9999px; top: 0;
   background: var(--green-dark); color: #fff;
-  padding: .7em 1.2em; border-radius: 0 0 8px 0;
+  padding: .7em 1.2em; border-radius: 0 0 var(--radius-sm) 0;
   z-index: 200; font-weight: 700; text-decoration: none;
 }
 .skip-link:focus { left: 0; }
@@ -834,18 +775,18 @@ body.show-ph .ph {
 .breadcrumb .sep { opacity: .5; }
 
 /* -------------------------------- Page hero ------------------------------ */
-/* A lighter-weight banner for inner pages — no photo, just the crest icon,
-   breadcrumb, title and a short line, on the same dark ground as the rest
-   of the site's dark sections. */
+/* A lighter-weight banner for inner pages — the crest icon, breadcrumb,
+   title and a short line, on the same ink ground as the rest of the site's
+   dark sections. */
 
 .page-hero {
-  background: linear-gradient(150deg, var(--charcoal) 0%, var(--charcoal-3) 100%);
+  background: var(--ink);
   color: rgba(255,255,255,.86);
   padding: clamp(44px, 6vw, 72px) 0;
 }
 .page-hero__icon {
   width: 54px; height: 54px;
-  border-radius: 14px;
+  border-radius: var(--radius-md);
   background: rgba(255,255,255,.08);
   display: grid; place-items: center;
   margin-bottom: 1.1rem;
@@ -861,28 +802,39 @@ body.show-ph .ph {
   display: block;
 }
 
-/* -------------------------------- CTA band ------------------------------- */
-/* A slim, single-purpose call to action — used where a full form would be
-   too much (e.g. the homepage, which points to the dedicated estimate page
-   instead of duplicating the form). */
-
-.cta-band { text-align: center; }
-.cta-band .section-head { margin-bottom: 0; }
-.cta-band h2 { color: #fff; }
-.cta-band p { color: rgba(255,255,255,.8); }
-.cta-band .btn { margin-top: 1.5rem; }
-
 /* --------------------------- Under construction --------------------------- */
+/* Designed previews for reserved scope — About, Contact, and House Cleaning
+   read as "scoped and waiting," not as a broken dead end: real header and
+   footer, a confident line about what's coming, a wireframed indication of
+   the page's intended shape, and a route back to the working site. */
 
-.uc { text-align: center; padding-block: clamp(64px, 10vw, 120px); }
-.uc__icon {
-  width: 74px; height: 74px;
-  margin: 0 auto 1.4rem;
-  border-radius: 18px;
-  background: var(--green-tint);
-  display: grid; place-items: center;
+.preview-copy { max-width: 60ch; margin: 0 0 clamp(28px, 4vw, 40px); }
+.preview-copy p { font-size: 1.05rem; }
+.preview-copy .btn { margin-top: .4rem; }
+
+.wireframe {
+  border: 1px dashed var(--line);
+  border-radius: var(--radius-md);
+  background: var(--stone);
+  padding: clamp(20px, 3vw, 32px);
 }
-.uc__icon svg { width: 36px; height: 36px; color: var(--green-dark); }
-.uc h1 { margin-bottom: .6rem; }
-.uc p { color: var(--muted); max-width: 52ch; margin-inline: auto; }
-.uc .btn { margin-top: 1.7rem; }
+.wireframe__row { display: grid; gap: 18px; }
+.wireframe__row--split { grid-template-columns: 1fr 1.4fr; align-items: center; }
+@media (max-width: 700px) { .wireframe__row--split { grid-template-columns: 1fr; } }
+.wireframe__block {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  min-height: 96px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--muted);
+  font-size: .82rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+}
+.wireframe__block--photo { min-height: 160px; }
+.wireframe__lines { display: grid; gap: 10px; }
+.wireframe__line { height: 12px; border-radius: 6px; background: var(--line); }
+.wireframe__line--head { height: 20px; width: 55%; background: #cdd3c6; }
+.wireframe__line--sm { width: 70%; }
+.wireframe__line--xs { width: 40%; }
+
+.preview-back { margin-top: clamp(28px, 4vw, 40px); }
