@@ -1,70 +1,79 @@
 # Placeholder checklist
 
-Everything below is invented and must be replaced before this page goes live.
 Turn on **Highlight placeholder copy** (bottom-right of the page) to see each
-one in context. The counter next to the toggle should read **0** when you're
-done.
+remaining one in context. The counter beside the toggle should read **0** when
+you're done. It currently reads **50**.
 
-## Contact details
+## Already filled in — real, verified from the business's Facebook page
 
-| What | Placeholder now | Appears in |
-|---|---|---|
-| Phone | `(555) 012-3456` | top bar, hero CTA, estimate panel, footer, mobile call bar, all `tel:` hrefs |
-| Email | `info@torrescleaningservices.com` | top bar, estimate panel, footer, all `mailto:` hrefs |
-| Hours | `Mon–Sat, 7am–6pm` | top bar, estimate panel, footer |
-| Street address | `[Street address, City, ST ZIP]` | footer |
+- **Phone** `(207) 800-6690` — top bar, hero CTA, estimate panel, footer, mobile
+  call bar, and every `tel:` href
+- **Email** `torrescleaning40@gmail.com` — top bar, estimate panel, footer, and
+  every `mailto:` href
+- **Facebook / Messenger** `facebook.com/profile.php?id=61591036726888`
+- **Business name** and the "Landscaping & Property Maintenance" tagline
+- **Service lines** — lawn care, landscaping, yard cleanups and house cleaning
+- **Positioning copy** — "reliable, affordable and detail-oriented", "quality
+  work, honest service", "free estimates" — all taken from their own About text
 
-The `tel:` and `mailto:` hrefs are separate from the visible text — update both.
-There are 5 `tel:+15550123456` and 3 `mailto:info@example.com` occurrences.
+## Still needed
 
-## Service area
+### Service area — the biggest gap
+
+Nothing on the Facebook page names a town. The `(207)` area code is Maine, but
+a mobile number follows its owner, so nothing here assumes a location.
 
 - `[Your City & surrounding areas]` — top bar
 - `[your service area]` — hero paragraph, footer blurb
 - `[Your City]` — service-area section intro
-- `[City One]` … `[City Six]` — the six area chips
+- `[City One]` … `[City Six]` — the six area chips (add or remove to match)
 
-Add or remove chips to match how many towns you actually cover.
+### Hours
 
-## Numbers you must verify
+`Mon–Sat, 7am–6pm` in the top bar, estimate panel and footer. Invented.
 
-These are the highest-risk items on the page — do not publish a number you
-can't back up.
+### Street address
+
+`[Street address, City, ST ZIP]` in the footer. Drop the line entirely if the
+business doesn't work from a public address.
+
+### Numbers — the highest-risk items on the page
+
+Do not publish a figure you can't back up.
 
 - `10+` years in business
 - `400+` properties maintained
-- `4.9★` average rating, and `Rated 5.0 by 40+ neighbors` in the hero badge
-- `24hr` estimate turnaround, and the `usually within 24 hours` / `same
-  business day` / `same-week walk-through` / `same-week start` promises
-- All prices: `$45`/visit, `$180`, `$120`, `$250`, `$150`, and the sample
-  estimate card (`$65`, `$120`, `$180`, `$425` monthly)
+- `4.9★` average rating
+- `24hr` estimate turnaround, plus the `usually within 24 hours`, `same business
+  day`, `same-week walk-through` and `same-week start` promises
+- Every price: `$45`/visit, `$180`, `$120`, `$250`, `$150`, and the sample
+  estimate card (`$65`, `$120`, `$180`, and `$425` monthly)
 
-## Licensing claim
+The stats bar is four invented numbers in a row. If real figures aren't
+available, delete that section rather than soften it.
 
-`Licensed and carrying full liability and workers' comp coverage` and the
-`Licensed & insured` badges appear four times. **Only keep these if they are
-literally true** — this is a claim that carries legal weight in most states. If
-you're insured but not licensed, say exactly that instead.
+### "Licensed and insured" — read this one carefully
 
-## Reviews
+The claim appears four times: a hero chip, a hero bullet, a floating badge on
+the estimate card, and a why-us feature. **The Facebook page does not claim
+either.** These are the only statements on the page that carry legal weight in
+most states, so keep them only if literally true. If the business is insured but
+not licensed, say exactly that instead; if neither, delete all four.
+
+### Reviews — currently invented
 
 All three testimonials, the reviewer names, initials and locations are written
-from scratch. Replace them with real quotes from your Facebook page or Google
-profile, with the reviewer's permission. Delete the section entirely rather
-than shipping invented reviews.
+from scratch. The Facebook page shows 26 followers and no visible reviews, so
+there is nothing real to copy across yet.
 
-## Commercial section
+Replace them with real quotes once they exist, with the reviewer's permission —
+or delete the whole `#reviews` section. Do not ship invented reviews.
+
+### Commercial section
 
 `HOAs, offices, retail centers, rental portfolios and construction sites` — trim
-this to the property types you actually service.
-
-## Not placeholders
-
-These are real and already correct:
-
-- The Facebook link (`facebook.com/profile.php?id=61591036726888`) — used in the
-  estimate panel, the footer social row, and the footer bottom bar.
-- Business name and the "Landscaping & Property Maintenance" tagline.
+to the property types actually serviced. Their Facebook page says "homes and
+businesses" without going further.
 
 ## Also before launch
 

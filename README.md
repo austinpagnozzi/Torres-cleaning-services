@@ -22,9 +22,10 @@ npx http-server -p 8080 .   # then open http://localhost:8080
 
 ## The placeholder system
 
-The business details behind the Facebook page weren't reachable when this was
-built, so **every unverified fact is wrapped in `<span class="ph">`** — phone,
-email, hours, city names, prices, stats, review text, licensing claims.
+Contact details, service lines and positioning copy are **real**, taken from the
+business's Facebook About page. Everything still unverified — hours, service
+area, prices, stats, review text and the licensing claims — is wrapped in
+`<span class="ph">`.
 
 There's a toggle in the bottom-right corner of the page: **Highlight
 placeholder copy**. Flip it on and every one lights up yellow, with a live
