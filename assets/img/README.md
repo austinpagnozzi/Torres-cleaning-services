@@ -1,8 +1,14 @@
-# Logo assets
+# Image assets
 
-Drop the real Torres Cleaning Services crest here — `logo.svg` preferred, or a
-transparent-background `logo.png` at 2x the largest rendered size (the biggest
-on-page use is the ~200px watermark, so 400px+ wide).
+- `logo.jpg` — the real Torres Cleaning Services crest (shield, crown, TS
+  monogram, crossed tools over a house, embroidered-patch style). Used in the
+  header, the hero estimate card, a small badge in the "Torres Standard"
+  panel, and the footer (see `.crest-badge` in `assets/css/styles.css` for the
+  white-mount treatment used on dark backgrounds).
+- `photos/` — six real job photos, pulled from the business's own Facebook
+  page. See `photos/README.md` for what each one is used for.
 
-The page currently ships an inline SVG approximation of the crest. See the
-"The logo" section of the root `README.md` for how to swap it in.
+Both arrived via a Google Drive folder the client shared mid-session — see
+the root `README.md`'s "The photography" section for why that route was
+necessary (in short: images pasted directly into chat weren't persisting to
+a file this assistant could read; Drive was the working alternative).

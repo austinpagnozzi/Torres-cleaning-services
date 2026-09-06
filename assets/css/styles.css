@@ -202,7 +202,17 @@ body.show-ph .ph {
 
 .brand { display: inline-flex; align-items: center; gap: .8em; text-decoration: none; }
 .brand > span { display: block; }
-.brand__crest { width: 46px; height: 54px; flex: none; color: var(--charcoal); }
+.brand__crest { width: 46px; height: 51px; flex: none; color: var(--charcoal); object-fit: contain; border-radius: 6px; }
+
+/* A small white mount behind the crest photo so it reads as a patch rather
+   than a floating image cutout wherever it sits on a dark background. */
+.crest-badge {
+  display: inline-flex; flex: none;
+  padding: 5px;
+  background: #fff;
+  border-radius: 9px;
+  box-shadow: var(--shadow-sm);
+}
 .brand__name {
   font-family: var(--font-display);
   font-weight: 600;
@@ -296,7 +306,7 @@ body.show-ph .ph {
   color: rgba(255,255,255,.84);
   background:
     linear-gradient(103deg, rgba(14,16,19,.82) 0%, rgba(14,16,19,.62) 46%, rgba(23,26,31,.3) 100%),
-    url("../img/generated/hero-lawn.jpg") center 38% / cover no-repeat,
+    url("../img/photos/hero-lawn-farmhouse.jpg") center 32% / cover no-repeat,
     #171a1f;
   padding: clamp(56px, 8vw, 104px) 0 clamp(60px, 9vw, 112px);
 }
@@ -513,13 +523,9 @@ body.show-ph .ph {
   overflow: hidden;
 }
 .promise__crest {
-  position: absolute; right: -48px; bottom: -46px;
+  position: absolute; top: clamp(30px, 4vw, 44px); right: clamp(30px, 4vw, 44px);
   z-index: 0;
-  width: 200px; height: 234px;
-  /* Both halves of the crest are dimmed, or the knocked-out paper areas
-     render as a solid white shape instead of a watermark. */
-  color: rgba(255,255,255,.05);
-  --crest-paper: rgba(0,0,0,.16);
+  opacity: .9;
   pointer-events: none;
 }
 .promise > *:not(.promise__crest) { position: relative; z-index: 1; }
@@ -620,7 +626,7 @@ body.show-ph .ph {
   overflow: hidden;
   background:
     linear-gradient(150deg, rgba(35,39,46,.94) 0%, rgba(14,16,19,.94) 70%),
-    url("../img/generated/estimate-bg.jpg") center / cover no-repeat,
+    url("../img/photos/backyard-mulch-fence.jpg") center 65% / cover no-repeat,
     var(--charcoal-3);
   color: rgba(255,255,255,.84);
 }
