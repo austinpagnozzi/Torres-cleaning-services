@@ -21,3 +21,17 @@ duplicated by hand across pages and kept in sync manually.
   stock or generated imagery). If a real photo isn't available for
   something, use an honest placeholder that doesn't pretend, rather than
   substituting a generic or fabricated image.
+
+## Quality bar
+
+The homepage as of commit `2fa3805` on `torres-spec-pitch-rework` (PR #1)
+is the reference quality level for this project going forward: a real,
+considered design system (not a default template); a Services grid that's
+an actual photo gallery of completed work, not icon-and-bullet cards; the
+two real reviews given real visual weight (green blocks) instead of a
+padded testimonial grid; every section shaped differently rather than
+repeating the same card pattern; no templated-AI tells (eyebrow-and-rule
+kickers, arrow-appended links, hover-lift-everything); and the writing
+style and content rules above already applied throughout. Match this bar
+on future homepage or landing-page work for this business, not a generic
+default.
