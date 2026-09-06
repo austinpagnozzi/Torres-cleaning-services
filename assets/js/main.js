@@ -103,30 +103,4 @@
       status.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
     });
   }
-
-  /* --------------------- Placeholder highlighting ------------------------ */
-  /* Every bit of copy still waiting on a real business detail is marked with
-     .ph. This toggle makes them all visible so nothing ships unfilled.
-     Delete the .ph-bar element (and this block) before launch. */
-
-  var phToggle = document.getElementById('ph-toggle');
-  var phCount  = document.getElementById('ph-count');
-  var marks    = document.querySelectorAll('.ph');
-
-  if (phCount) { phCount.textContent = String(marks.length); }
-
-  if (phToggle) {
-    var KEY = 'tcs-show-placeholders';
-    var stored;
-    try { stored = window.localStorage.getItem(KEY); } catch (err) { stored = null; }
-
-    var apply = function (on) {
-      document.body.classList.toggle('show-ph', on);
-      phToggle.checked = on;
-      try { window.localStorage.setItem(KEY, on ? '1' : '0'); } catch (err) { /* private mode */ }
-    };
-
-    apply(stored === '1');
-    phToggle.addEventListener('change', function () { apply(phToggle.checked); });
-  }
 })();
